@@ -1,0 +1,49 @@
+import java.util.Scanner;
+import java.util.Arrays;
+public class LeastCpacityToShipPackagewith_D(days) {
+    public int leastCpacityToShipPackagewith_D(int[] weights, int days) {
+        int sum=0;
+        int max=Integer.MIN_VALUE;
+        for(int i=0;i<weights.length;i++){
+            sum+=weights[i];
+            max=Math.max(max,weights[i]);
+        }
+
+        int left=max;
+        int right=sum;
+        int result=0;
+        while(left<=right){
+            int mid=(left+right)/2;
+            int requiredDays=countDays(weights,mid);
+            if(requiredDays<=days){
+                result=mid;
+                right=mid-1;
+            }
+            else{
+                left=mid+1;
+            }
+        }
+        return left;
+    }
+    public int countDays(int[] weights, int capacity){
+        int days=0;
+        int currentWeight=0;
+        for(int i=0;i<weights.length;i++){
+            if(currentWeight+weights[i]>capacity){
+                days++;
+                currentWeight=weights[i];
+            }
+            else{
+                currentWeight+=weights[i];
+            }
+        }
+        return days+1;
+    }
+    public static void main(String[] args) {
+        int[] weights = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int days = 5;
+        int result = leastCpacityToShipPackagewith_D(weights, days);
+        System.out.println(result);
+    }
+}
+
