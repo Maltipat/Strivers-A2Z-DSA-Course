@@ -1,0 +1,51 @@
+import java.util.Arrays;
+public class Aggressive_cows {
+    
+    public static void main(String[] args) {
+        int[] stalls = {1, 2, 4, 8, 9};
+        int cows = 3;
+        System.out.println(aggressiveCows(stalls, cows));
+    }
+    public static int aggressiveCows(int[] stalls, int cows) {
+        Arrays.sort(stalls);
+        int low=0;
+        int high=stalls[stalls.length-1]-stalls[0];
+        while(low<=high){
+            int mid=(low+high)/2;
+            if(isPossible(stalls, cows, mid)){
+                low=mid+1;
+            }   
+            else{
+                high=mid-1;
+            }
+        }
+        return low;
+    }
+    public static boolean isPossible(int[] stalls, int cows, int mid){
+        int count=1;
+        int last=stalls[0];
+        for(int i=1;i<stalls.length;i++){
+            if(stalls[i]-last>=mid){
+                count++;
+                last=stalls[i];
+            }
+            if(count>=cows){
+                return true;
+            }
+        }
+        return false;
+    }
+        
+}
+    // public static int aggressiveCows(int[] stalls, int cows){
+    //     Arrays.sort(stalls);
+    //     for(int i=0;i<stalls.length;i++){
+    //         for(int j=i+1;j<stalls.length;j++){
+    //             if(stalls[j]-stalls[i]>=cows){
+    //                 return stalls[j]-stalls[i];
+    //             }
+    //         }
+    //     }
+    //     return -1;
+    // }
+
