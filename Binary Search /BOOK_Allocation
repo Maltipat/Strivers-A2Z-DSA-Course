@@ -1,0 +1,50 @@
+public class Book_Allocation {
+    
+    public static void main(String[] args) {
+        int[] books = {1, 2, 3, 4};
+        int students = 2;
+        int result = bookAllocation(books, students);
+        System.out.println(result);
+    }
+    public static int bookAllocation(int[] books, int students) {
+        int low = 0;
+        int high = max(books);
+        int result = 0;
+        while (low<=high) {
+            int mid = (low + high) / 2;
+            if(isPossible(books, students, mid)) {
+                result = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return result;
+    }
+    public static boolean isPossible(int[] books, int students, int mid) {
+        int Student = 1;
+        int sum = 0;
+        for(int i = 0; i < books.length; i++) {
+            if(sum+books[i]<=mid){
+                sum += books[i];
+            }
+            else{
+                Student++;
+                sum = books[i];
+            }
+            if(Student>students){
+                return false;
+            }
+        }
+        return true;
+    }
+    public static int max(int[] books) {
+        int max = books[0];
+        for(int i = 1; i < books.length; i++) {
+            if(books[i] > max) {
+                max = books[i];
+            }
+        }
+        return max;
+    }
+}
