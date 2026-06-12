@@ -1,0 +1,19 @@
+class Solution {
+
+    public ListNode insertAtHead(ListNode head, int X) {
+
+        // Step 1: Create a new node with given value X
+        ListNode newNode = new ListNode(X);
+
+        // Step 2: Make the new node point to the current head
+        // This links the new node with the existing linked list
+        newNode.next = head;
+
+        // Step 3: Update head to point to the new node
+        // Now newNode becomes the first node of the list
+        head = newNode;
+
+        // Step 4: Return the updated head of the linked list
+        return head;
+    }
+}
