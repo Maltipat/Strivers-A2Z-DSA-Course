@@ -1,0 +1,18 @@
+class Solution {
+
+    public ListNode deleteHead(ListNode head) {
+
+        // Step 1: Check if the linked list is empty
+        // If head is null, there is nothing to delete
+        if (head == null) {
+            return null;
+        }
+
+        // Step 2: Move head to the next node
+        // This effectively removes the first node from the list
+        head = head.next;
+
+        // Step 3: Return the updated head of the linked list
+        return head;
+    }
+}
