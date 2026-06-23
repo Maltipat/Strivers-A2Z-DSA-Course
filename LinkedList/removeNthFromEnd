@@ -1,0 +1,33 @@
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+
+        // Pass 1: Count total nodes
+        int count = 0;
+        ListNode temp = head;
+
+        while (temp != null) {
+            count++;
+            temp = temp.next;
+        }
+
+        // Pass 2: Find target position
+        int target = count - n;
+
+        // Edge case: Delete head node
+        if (target == 0) {
+            return head.next;
+        }
+
+        // Move to the node before the target
+        ListNode curr = head;
+
+        for (int i = 1; i < target; i++) {
+            curr = curr.next;
+        }
+
+        // Delete the target node
+        curr.next = curr.next.next;
+
+        return head;
+    }
+}
